@@ -18,7 +18,7 @@ Commands:
 
 # Step 1: create a local repo.
 1. In the folder you want the local repo to be, right-click and click on "Git Bash Here".
-2. type the command "git clone https://github.com/SteveParker-github/DeathDash.git".
+2. type the command or Ctrl + C this line (without quote marks) "git clone https://github.com/SteveParker-github/DeathDash.git", Then use shift + ins to actaully paste this line into the Git bash Window.
 
 # Step 2: open the prototype branch
 1. In the the folder of the new local repo use git bash.
