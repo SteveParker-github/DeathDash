@@ -12,8 +12,9 @@ Commands:
 - "git add [file or folder name]": adds files or folders to the commit stage"
 - "git commit": stages the commit ready to be pushed to the repo (Note: add -m[message in quotes] to the end to leave a comment on what you are doing which is helpful for letting everyone know what has been done).
 - "git push": pushes the commit/s to the repo.
-- ctrl + ins: copy
-- shift + ins: paste 
+- ctrl + ins: Copy
+- shift + ins: Paste
+- ctrl + c: Cancel execution.
 
 # Step 1: create a local repo.
 1. In the folder you want the local repo to be, right-click and click on "Git Bash Here".
