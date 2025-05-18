@@ -23,5 +23,5 @@ Commands:
 4. Then close the GitBash Window once its complete. 
 
 # Step 2: open the prototype branch
-1. In the the folder of the new local repo use git bash.
-2. type the command "git checkout prototype_1"
+1. Double click in the newly made folder, then right-click and click on "Git Bash Here" again the wording in this window should say (main) in blue 
+2. type the command or Ctrl + C "git checkout prototype_1" shift + ins to paste into Gitbash Window again 
