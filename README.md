@@ -24,4 +24,5 @@ Commands:
 
 # Step 2: open the prototype branch
 1. Double click in the newly made folder, then right-click and click on "Git Bash Here" again the wording in this window should say (main) in blue 
-2. type the command or Ctrl + C "git checkout prototype_1" shift + ins to paste into Gitbash Window again 
+2. type the command or Ctrl + C "git checkout prototype_1" then shift + ins to paste into Gitbash Window
+3. ENTER Key - Will then say Switched to a new branch 'NameOfBranch'
