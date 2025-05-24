@@ -11,10 +11,15 @@ public class EnemyController : MonoBehaviour
     private Transform checkFloorTran;
     public LayerMask groundMask;
     private TimeManager timeManager;
+    private SpawnPoint spawnPoint;
+    public float maxHealth = 50.0f;
+    private float currentHealth;
+    private bool beenHit = false;
 
     private void Awake()
     {
         pos = transform;
+        currentHealth = maxHealth;
     }
 
     // Start is called before the first frame update
@@ -22,7 +27,7 @@ public class EnemyController : MonoBehaviour
     {
         enemySpawnerController = FindAnyObjectByType<EnemySpawnerController>();
 
-                timeManager = FindAnyObjectByType<TimeManager>();
+        timeManager = FindAnyObjectByType<TimeManager>();
 
         if (timeManager == null)
         {
@@ -30,15 +35,34 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void Hit()
+    public void Hit(float damage)
     {
-        //for now let the enemy die from 1 hit.
-        Died();
+        if (beenHit) return;
+
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+        if (currentHealth == 0)
+        {
+            Died();
+            return;
+        }
+
+        StartCoroutine(GettingHit());
+    }
+
+    private IEnumerator GettingHit()
+    {
+        beenHit = true;
+        yield return new WaitForSecondsRealtime(3.0f);
+        beenHit = false;
     }
 
     private void Died()
     {
-        enemySpawnerController.triggerRespawn(this);
+        //enemySpawnerController.triggerRespawn(this);
+        spawnPoint.EnemyDied();
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -49,7 +73,6 @@ public class EnemyController : MonoBehaviour
 
     private void Move()
     {
-
         if (!CheckFloor())
         {
             //turn around and move;
@@ -66,7 +89,12 @@ public class EnemyController : MonoBehaviour
     private bool CheckFloor()
     {
         float groundedRadius = 0.2f;
-		bool isGrounded = Physics.CheckSphere(checkFloorTran.position, groundedRadius, groundMask, QueryTriggerInteraction.Ignore);
+        bool isGrounded = Physics.CheckSphere(checkFloorTran.position, groundedRadius, groundMask, QueryTriggerInteraction.Ignore);
         return isGrounded;
+    }
+
+    public void NewSpawnPoint(SpawnPoint spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
     }
 }

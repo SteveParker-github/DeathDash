@@ -18,6 +18,7 @@ public class Spear : MonoBehaviour
 
     //melee
     public bool isMelee = false;
+    public float damage = 20.0f;
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class Spear : MonoBehaviour
                 return;
             }
 
-            enemy.Hit();
+            enemy.Hit(damage);
 
             if (isThrown)
             {
