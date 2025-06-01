@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
     public Transform pos;
-    private EnemySpawnerController enemySpawnerController;
     private float currentDir = 1;
     [SerializeField]
     private Transform checkFloorTran;
@@ -14,19 +14,23 @@ public class EnemyController : MonoBehaviour
     private SpawnPoint spawnPoint;
     public float maxHealth = 50.0f;
     private float currentHealth;
-    private bool beenHit = false;
+
+    //ui
+    [SerializeField]
+    private Canvas canvas;
+    [SerializeField]
+    private Slider slider;
 
     private void Awake()
     {
         pos = transform;
         currentHealth = maxHealth;
+        canvas.enabled = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        enemySpawnerController = FindAnyObjectByType<EnemySpawnerController>();
-
         timeManager = FindAnyObjectByType<TimeManager>();
 
         if (timeManager == null)
@@ -37,30 +41,19 @@ public class EnemyController : MonoBehaviour
 
     public void Hit(float damage)
     {
-        if (beenHit) return;
-
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
-
+        canvas.enabled = true;
+        slider.value = currentHealth / maxHealth;
         if (currentHealth == 0)
         {
             Died();
             return;
         }
-
-        StartCoroutine(GettingHit());
-    }
-
-    private IEnumerator GettingHit()
-    {
-        beenHit = true;
-        yield return new WaitForSecondsRealtime(3.0f);
-        beenHit = false;
     }
 
     private void Died()
     {
-        //enemySpawnerController.triggerRespawn(this);
         spawnPoint.EnemyDied();
         Destroy(gameObject);
     }
