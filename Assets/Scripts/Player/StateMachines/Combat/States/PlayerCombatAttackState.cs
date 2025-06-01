@@ -19,7 +19,7 @@ public class PlayerCombatAttackState : PlayerCombatBaseState
         attackCounter = attackCounter % 3;
         Ctx.Anim.SetInteger("Counter", attackCounter);
 
-        Ctx.CurrentSpear.isMelee = true;
+        Ctx.CurrentSpear.StartMelee();
     }
 
     public override void UpdateState()
@@ -31,7 +31,7 @@ public class PlayerCombatAttackState : PlayerCombatBaseState
     public override void ExitState()
     {
         Ctx.Anim.Play("idle");
-        Ctx.CurrentSpear.isMelee = false;
+        Ctx.CurrentSpear.EndMelee();
         Ctx.StartComboCountdown();
     }
 

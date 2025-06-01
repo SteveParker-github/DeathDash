@@ -19,6 +19,7 @@ public class Spear : MonoBehaviour
     //melee
     public bool isMelee = false;
     public float damage = 20.0f;
+    private List<EnemyController> hitEnemies;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class Spear : MonoBehaviour
         mass = rb.mass;
         spearCollider = GetComponent<BoxCollider>();
         spearCollider.isTrigger = true;
+        hitEnemies = new List<EnemyController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,11 +46,20 @@ public class Spear : MonoBehaviour
                 return;
             }
 
+            if (isMelee && hitEnemies.Contains(enemy))
+            {
+                return;
+            }
+
             enemy.Hit(damage);
 
             if (isThrown)
             {
                 Destroy(gameObject);
+            }
+            else
+            {
+                hitEnemies.Add(enemy);
             }
         }
     }
@@ -70,6 +81,8 @@ public class Spear : MonoBehaviour
             Destroy(gameObject, maxTimeLimit);
         }
     }
+
+    #region not being used
     public void ShowAimArc(float force)
     {
         lineRenderer.enabled = true;
@@ -108,6 +121,8 @@ public class Spear : MonoBehaviour
         StartCoroutine(SpearRotate());
     }
 
+    #endregion
+
     public void Throw(float force, quaternion dir)
     {
         isThrown = true;
@@ -127,5 +142,16 @@ public class Spear : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             yield return null;
         }
+    }
+
+    public void StartMelee()
+    {
+        isMelee = true;
+    }
+
+    public void EndMelee()
+    {
+        isMelee = false;
+        hitEnemies.Clear();
     }
 }
