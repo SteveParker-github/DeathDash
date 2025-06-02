@@ -500,5 +500,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   maxHealth: 50
+  skinTypes:
+  - {fileID: 2100000, guid: 45d2bd36ad97bcb47b6ca14af12ec6a8, type: 2}
+  - {fileID: 2100000, guid: fdc7ca83eaefa804e8083307629d44ac, type: 2}
+  - {fileID: 2100000, guid: a36c1dcbefe5ade4ea348ca49bf99428, type: 2}
+  - {fileID: 2100000, guid: fb8b4f6f7ee97f343adfecc0b0a1b6a9, type: 2}
+  rend: {fileID: 5081031834889002248}
   canvas: {fileID: 4272686243695941449}
   slider: {fileID: 2040781192911626667}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,15 +42,36 @@ public class SpawnPoint : MonoBehaviour
         enemyCounter++;
         currentSpawning = true;
         yield return new WaitForSecondsRealtime(cooldown);
-        GameObject enemyPrefab = spawnableEnemies[Random.Range(0, spawnableEnemies.Length - 1)];
+        GameObject enemyPrefab = spawnableEnemies[UnityEngine.Random.Range(0, spawnableEnemies.Length - 1)];
         GameObject enemy = Instantiate(enemyPrefab, transform.position, transform.rotation);
         EnemyController ec = enemy.GetComponent<EnemyController>();
-        ec.NewSpawnPoint(this);
+        int[] randomNo = PickRandomNo();
+        ec.Spawn(this, (EElements)randomNo[0], (EElements)randomNo[1]);
         currentSpawning = false;
     }
 
     public void EnemyDied()
     {
         enemyCounter--;
+    }
+
+    private int[] PickRandomNo()
+    {
+        int[] no = new int[Enum.GetValues(typeof(EElements)).Length];
+
+        for (int i = 0; i < no.Length; i++)
+        {
+            no[i] = i;
+        }
+
+        for (int i = 0; i < no.Length; i++)
+        {
+            int randomNo = no[UnityEngine.Random.Range(0, no.Length - 1)];
+            int temp = no[i];
+            no[i] = no[randomNo];
+            no[randomNo] = temp;
+        }
+
+        return no;
     }
 }

@@ -8,6 +8,7 @@ public class Spear : MonoBehaviour
     private bool isThrown = false;
     private bool hitWall = false;
     private float maxTimeLimit = 2.0f;
+    private EElements weaponType = EElements.Salt;
 
     //throwing variables
     private int maxSteps = 49;
@@ -51,7 +52,7 @@ public class Spear : MonoBehaviour
                 return;
             }
 
-            enemy.Hit(damage);
+            enemy.Hit(damage, weaponType);
 
             if (isThrown)
             {
