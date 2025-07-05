@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 5081031834889002248}
   - component: {fileID: 1439219297589208824}
   - component: {fileID: -2942700469511838722}
+  - component: {fileID: -4113083119150896152}
   m_Layer: 0
   m_Name: BasicEnemyDummy
   m_TagString: Enemy
@@ -495,10 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: {fileID: 0}
-  checkFloorTran: {fileID: 6169081312939723554}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
+  spawnPoint: {fileID: 0}
   maxHealth: 50
   skinTypes:
   - {fileID: 2100000, guid: 45d2bd36ad97bcb47b6ca14af12ec6a8, type: 2}
@@ -508,3 +506,19 @@ MonoBehaviour:
   rend: {fileID: 5081031834889002248}
   canvas: {fileID: 4272686243695941449}
   slider: {fileID: 2040781192911626667}
+--- !u!114 &-4113083119150896152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215690660285627416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfaff10eb550c724e8ee911a3513eb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkFloorTran: {fileID: 6169081312939723554}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8

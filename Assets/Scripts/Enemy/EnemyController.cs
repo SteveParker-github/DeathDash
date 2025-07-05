@@ -6,11 +6,7 @@ using UnityEngine.UI;
 public class EnemyController : MonoBehaviour
 {
     public Transform pos;
-    private float currentDir = 1;
     [SerializeField]
-    private Transform checkFloorTran;
-    public LayerMask groundMask;
-    private TimeManager timeManager;
     private SpawnPoint spawnPoint;
     public float maxHealth = 50.0f;
     private float currentHealth;
@@ -37,12 +33,6 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeManager = FindAnyObjectByType<TimeManager>();
-
-        if (timeManager == null)
-        {
-            Debug.Log("TimeManager was not found!");
-        }
     }
 
     public void Hit(float damage, EElements weaponType)
@@ -80,29 +70,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-    }
-
-    private void Move()
-    {
-        if (!CheckFloor())
-        {
-            //turn around and move;
-            transform.Rotate(new Vector3(0, 180, 0));
-            currentDir *= -1;
-            return;
-        }
-
-        Vector3 forwardDir = transform.forward * currentDir * 4 * Time.deltaTime * timeManager.currentTime;
-
-        transform.Translate(forwardDir);
-    }
-
-    private bool CheckFloor()
-    {
-        float groundedRadius = 0.2f;
-        bool isGrounded = Physics.CheckSphere(checkFloorTran.position, groundedRadius, groundMask, QueryTriggerInteraction.Ignore);
-        return isGrounded;
     }
 
     public void Spawn(SpawnPoint spawnPoint, EElements weakness, EElements strength)
